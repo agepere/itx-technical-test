@@ -14,7 +14,9 @@ import java.util.NoSuchElementException;
 @ControllerAdvice
 public class ExceptionController {
 
-    @ExceptionHandler(value = Throwable.class)
+
+    //Todo: probar a añadir path
+    @ExceptionHandler(value = IllegalArgumentException.class)
     public ResponseEntity<ErrorDto> genericException(Throwable exception) {
 
         ErrorDto error = new ErrorDto();
@@ -41,7 +43,7 @@ public class ExceptionController {
     @NoArgsConstructor
     @Getter
     @Setter
-    public class ErrorDto {
+    private class ErrorDto {
         private String code;
         private String errorMessage;
     }
