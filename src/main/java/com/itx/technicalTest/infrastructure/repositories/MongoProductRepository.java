@@ -1,14 +1,12 @@
 package com.itx.technicalTest.infrastructure.repositories;
 
 import com.itx.technicalTest.infrastructure.entities.ProductEntity;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 @Repository
 public interface MongoProductRepository extends MongoRepository<ProductEntity, String> {
@@ -16,7 +14,7 @@ public interface MongoProductRepository extends MongoRepository<ProductEntity, S
 
     @Aggregation(pipeline = {
             """
-                    {$addFields: 
+                    {$addFields:
                         {
                              stockLines: {
                                  $filter: {
@@ -31,8 +29,8 @@ public interface MongoProductRepository extends MongoRepository<ProductEntity, S
                      }
                      """,
             """
-                    {$addFields: 
-                        {totalScore: 
+                    {$addFields:
+                        {totalScore:
                             {
                                 $add: [
                                     {$multiply: ["$sales", ?0],},

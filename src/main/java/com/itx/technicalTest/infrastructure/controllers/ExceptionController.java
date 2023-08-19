@@ -10,9 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.security.InvalidParameterException;
-import java.util.NoSuchElementException;
-
 @ControllerAdvice
 public class ExceptionController {
 
@@ -46,7 +43,7 @@ public class ExceptionController {
     @NoArgsConstructor
     @Getter
     @Setter
-    private class ErrorDto {
+    public class ErrorDto {
         private String code;
         private String errorMessage;
         private String path;

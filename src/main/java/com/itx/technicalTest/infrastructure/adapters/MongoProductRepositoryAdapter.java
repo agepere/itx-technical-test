@@ -22,9 +22,9 @@ public class MongoProductRepositoryAdapter implements ProductRepository {
 
 
     @Override
-    public List<Product> findAllSortedByScore(Integer page, Integer size) {
+    public List<Product> findAllSortedByScore(Double salesScoreRatio, Double stockScoreRatio, Integer page, Integer size) {
         Pageable pageParams = PageRequest.of(page, size);
-        return this.mongoProductRepository.findAllSortedByScore(0d, 1d, pageParams).stream().map(ProductMapper::toDomainModel).toList();
+        return this.mongoProductRepository.findAllSortedByScore(salesScoreRatio, stockScoreRatio, pageParams).stream().map(ProductMapper::toDomainModel).toList();
     }
 
     @Override

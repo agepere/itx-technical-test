@@ -6,7 +6,7 @@ public record ProductName(String name) {
     }
 
     private void checkNameLengthIsGreaterThanZero(String name) {
-        if (name == null || name.length() == 0) {
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name length must be greater than 0. Received: " + name);
         }
 

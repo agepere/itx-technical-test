@@ -33,7 +33,7 @@ public class ProductController {
             @RequestParam(defaultValue = "${application.default.page.size}", required = false) Integer size,
             @RequestParam(defaultValue = "0.0", required = false) Double salesScoreRatio,
             @RequestParam(defaultValue = "0.0", required = false) Double stockScoreRatio) {
-        List<Product> products = (List<Product>) this.productService.getAllSortedByScore(page, size);
+        List<Product> products = (List<Product>) this.productService.getAllSortedByScore(salesScoreRatio, stockScoreRatio, page, size);
         List<ProductEntity> productsDto = products.stream().map(ProductMapper::fromDomainModel).toList();
 
         return new ResponseEntity<>(productsDto, HttpStatus.CREATED);
