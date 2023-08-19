@@ -12,8 +12,8 @@ public class ProductService implements ProductUseCases {
     private final ProductRepository productRepository;
 
     @Override
-    public Iterable<Product> getAll(Integer page, Integer size) {
-        return this.productRepository.findAll(page, size);
+    public Iterable<Product> getAllSortedByScore(Integer page, Integer size) {
+        return this.productRepository.findAllSortedByScore(page, size);
     }
 
     @Override

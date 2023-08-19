@@ -3,7 +3,7 @@ package com.itx.technicalTest.infrastructure.adapters;
 import com.itx.technicalTest.domain.models.Product;
 import com.itx.technicalTest.domain.repositories.ProductRepository;
 import com.itx.technicalTest.infrastructure.entities.ProductEntity;
-import com.itx.technicalTest.infrastructure.entities.mappers.ProductEntityMapper;
+import com.itx.technicalTest.infrastructure.entities.mappers.ProductMapper;
 import com.itx.technicalTest.infrastructure.repositories.MongoProductRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,17 +22,17 @@ public class MongoProductRepositoryAdapter implements ProductRepository {
 
 
     @Override
-    public List<Product> findAll(Integer page, Integer size) {
+    public List<Product> findAllSortedByScore(Integer page, Integer size) {
         Pageable pageParams = PageRequest.of(page, size);
-        return this.mongoProductRepository.findAll(pageParams).stream().map(ProductEntityMapper::toDomainModel).toList();
+        return this.mongoProductRepository.findAllSortedByScore(0d, 1d, pageParams).stream().map(ProductMapper::toDomainModel).toList();
     }
 
     @Override
     public Product save(Product product) {
-        ProductEntity productEntity = ProductEntityMapper.fromDomainModel(product);
+        ProductEntity productEntity = ProductMapper.fromDomainModel(product);
         ProductEntity savedProductEntity = this.mongoProductRepository.save(productEntity);
 
-        return ProductEntityMapper.toDomainModel(savedProductEntity);
+        return ProductMapper.toDomainModel(savedProductEntity);
 
     }
 }

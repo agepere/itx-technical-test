@@ -1,10 +1,6 @@
 package com.itx.technicalTest.domain.models;
 
-import com.itx.technicalTest.domain.models.valueObjects.ProductName;
-import com.itx.technicalTest.domain.models.valueObjects.ProductSales;
-import com.itx.technicalTest.domain.models.valueObjects.Size;
-import com.itx.technicalTest.domain.models.valueObjects.Stock;
-import lombok.AllArgsConstructor;
+import com.itx.technicalTest.domain.models.valueObjects.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,22 +9,18 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class Product {
+public abstract class Product {
     private final String id;
     private ProductName name;
     private ProductSales sales;
-    private Set<Stock> stockSet;
+    private ProductType type;
 
-    public Product(String id, String name, Integer sales) {
+    public Product(String id, String name, Integer sales, String type) {
         this.id = id;
         this.name = new ProductName(name);
         this.sales = new ProductSales(sales);
-        this.stockSet = new HashSet<>();
+        this.type = ProductType.valueOf(type);
     }
 
-    public void addStockPerSize(String size, Integer stock) {
-        Stock stockPerSize = new Stock(Size.valueOf(size), stock);
-        this.stockSet.add(stockPerSize);
-    }
 
 }

@@ -1,5 +1,6 @@
 package com.itx.technicalTest.infrastructure.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,35 +10,37 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.security.InvalidParameterException;
 import java.util.NoSuchElementException;
 
 @ControllerAdvice
 public class ExceptionController {
 
 
-    //Todo: probar a añadir path
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ErrorDto> genericException(Throwable exception, HttpServletRequest request) {
+
+        ErrorDto error = new ErrorDto();
+        error.setCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        error.setErrorMessage(exception.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+
     @ExceptionHandler(value = IllegalArgumentException.class)
-    public ResponseEntity<ErrorDto> genericException(Throwable exception) {
+    public ResponseEntity<ErrorDto> illegalArgumentException(Throwable exception, HttpServletRequest request) {
 
         ErrorDto error = new ErrorDto();
-        error.setCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        error.setCode(HttpStatus.BAD_REQUEST.toString());
         error.setErrorMessage(exception.getMessage());
+        error.setPath(request.getRequestURI());
 
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 
     }
 
-    //FIXME: Borrar
-    @ExceptionHandler(value = NoSuchElementException.class)
-    public ResponseEntity<ErrorDto> noSuchElementException(Throwable exception) {
-
-        ErrorDto error = new ErrorDto();
-        error.setCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
-        error.setErrorMessage(exception.getMessage());
-
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-
-    }
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -46,5 +49,6 @@ public class ExceptionController {
     private class ErrorDto {
         private String code;
         private String errorMessage;
+        private String path;
     }
 }

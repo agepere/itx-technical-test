@@ -1,5 +1,5 @@
 package com.itx.technicalTest.domain.models.valueObjects;
 
-public enum Size {
+public enum TShirtSize {
     L, M, S
 }
