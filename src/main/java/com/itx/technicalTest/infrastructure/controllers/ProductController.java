@@ -29,7 +29,7 @@ public class ProductController {
 
     //TODO: El número de paginación debe ir a la configuración
     @GetMapping
-    public ResponseEntity<Iterable<ProductEntity>> getAllProducts(
+    public ResponseEntity<List<ProductEntity>> getAllProducts(
             @RequestParam(defaultValue = "0", required = false) Integer page,
             @RequestParam(defaultValue = "20", required = false) Integer size) {
         List<Product> products = (List<Product>) this.productService.getAll(page, size);
