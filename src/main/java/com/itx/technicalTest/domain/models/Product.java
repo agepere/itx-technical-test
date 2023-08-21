@@ -12,7 +12,7 @@ public abstract class Product {
     private ProductSales sales;
     private ProductType type;
 
-    public Product(String id, String name, Integer sales, String type) {
+    protected Product(String id, String name, Integer sales, String type) {
         this.id = id;
         this.name = new ProductName(name);
         this.sales = new ProductSales(sales);

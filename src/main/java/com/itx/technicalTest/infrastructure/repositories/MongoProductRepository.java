@@ -1,6 +1,6 @@
 package com.itx.technicalTest.infrastructure.repositories;
 
-import com.itx.technicalTest.infrastructure.entities.ProductEntity;
+import com.itx.technicalTest.infrastructure.data.entities.ProductEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.mongodb.repository.Aggregation;

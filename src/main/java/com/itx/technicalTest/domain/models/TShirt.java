@@ -24,11 +24,11 @@ public class TShirt extends Product {
 
     public void addStockPerSize(String size, Integer stock) {
         StockPerTShirtSize stockPerSize = new StockPerTShirtSize(valueOfSize(size), stock);
-        Boolean added = this.stockSet.add(stockPerSize);
+        boolean added = this.stockSet.add(stockPerSize);
         checkStockIsAdded(added);
     }
 
-    private void checkStockIsAdded(Boolean added) {
+    private void checkStockIsAdded(boolean added) {
         if (!added) {
             throw new IllegalArgumentException("All sizes must be different.");
         }

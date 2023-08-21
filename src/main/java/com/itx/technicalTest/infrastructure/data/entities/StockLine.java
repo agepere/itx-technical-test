@@ -1,4 +1,4 @@
-package com.itx.technicalTest.infrastructure.entities;
+package com.itx.technicalTest.infrastructure.data.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class StockLineEntity {
+public class StockLine {
     private String size;
     private Integer stock;
 }

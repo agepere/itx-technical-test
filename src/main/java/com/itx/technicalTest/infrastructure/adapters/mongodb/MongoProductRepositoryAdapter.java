@@ -3,8 +3,8 @@ package com.itx.technicalTest.infrastructure.adapters.mongodb;
 import com.itx.technicalTest.domain.models.Product;
 import com.itx.technicalTest.domain.repositories.ProductRepository;
 import com.itx.technicalTest.infrastructure.adapters.mongodb.aggregations.ProductScoreAggregationUtils;
-import com.itx.technicalTest.infrastructure.entities.ProductEntity;
-import com.itx.technicalTest.infrastructure.entities.mappers.ProductMapper;
+import com.itx.technicalTest.infrastructure.data.entities.ProductEntity;
+import com.itx.technicalTest.infrastructure.data.mappers.ProductMapper;
 import com.itx.technicalTest.infrastructure.repositories.MongoProductRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +34,7 @@ public class MongoProductRepositoryAdapter implements ProductRepository {
                 ProductScoreAggregationUtils.removeStockLinesOutOfStock(),
                 ProductScoreAggregationUtils.calculateTotalScore(salesScoreRatio, stockScoreRatio),
                 ProductScoreAggregationUtils.sortByTotalScore(),
-                Aggregation.skip(page * size),
+                Aggregation.skip(page * (long) size),
                 Aggregation.limit(size)
 
         );
@@ -54,7 +54,7 @@ public class MongoProductRepositoryAdapter implements ProductRepository {
 
     @Override
     public Product save(Product product) {
-        ProductEntity productEntity = ProductMapper.fromDomainModel(product);
+        ProductEntity productEntity = ProductMapper.fromDomainModelToDAO(product);
         ProductEntity savedProductEntity = this.mongoProductRepository.save(productEntity);
 
         return ProductMapper.toDomainModel(savedProductEntity);

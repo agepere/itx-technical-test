@@ -1,4 +1,4 @@
-package com.itx.technicalTest.infrastructure.entities;
+package com.itx.technicalTest.infrastructure.data.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class ProductEntity {
     private String type;
     @Indexed(name = "sales_index", direction = IndexDirection.DESCENDING)
     private Integer sales;
-    private List<StockLineEntity> stockLines;
+    private List<StockLine> stockLines;
 
 
 }

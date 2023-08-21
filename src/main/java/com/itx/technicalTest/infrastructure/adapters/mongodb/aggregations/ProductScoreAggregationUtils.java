@@ -10,6 +10,10 @@ public class ProductScoreAggregationUtils {
     private static final String STOCK_LINES_STOCK_MONGO_FIELD = "stock";
     private static final String TOTAL_SCORE_AGGREGATION_FIELD = "totalScore";
 
+    private ProductScoreAggregationUtils() {
+        throw new IllegalStateException("ProductScoreAggregationUtils is an utility class, it should not be instantiated.");
+    }
+
     public static AddFieldsOperation removeStockLinesOutOfStock() {
         AggregationExpression filterRemoveOutOfStock = ComparisonOperators.Ne.valueOf("$$item." + STOCK_LINES_STOCK_MONGO_FIELD).notEqualToValue(0);
 
