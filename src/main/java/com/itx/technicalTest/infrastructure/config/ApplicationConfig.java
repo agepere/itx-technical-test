@@ -3,7 +3,7 @@ package com.itx.technicalTest.infrastructure.config;
 
 import com.itx.technicalTest.application.services.ProductService;
 import com.itx.technicalTest.domain.repositories.ProductRepository;
-import com.itx.technicalTest.infrastructure.adapters.MongoProductRepositoryAdapter;
+import com.itx.technicalTest.infrastructure.adapters.mongodb.MongoProductRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

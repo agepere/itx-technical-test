@@ -17,6 +17,11 @@ public class ProductService implements ProductUseCases {
     }
 
     @Override
+    public Iterable<Product> getAllSortedByScoreNative(Double salesScoreRatio, Double stockScoreRatio, Integer page, Integer size) {
+        return this.productRepository.findAllSortedByScoreNative(salesScoreRatio, stockScoreRatio, page, size);
+    }
+
+    @Override
     public Product create(Product product) {
         return this.productRepository.save(product);
     }
