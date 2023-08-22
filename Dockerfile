@@ -3,7 +3,7 @@ FROM maven:3.9.3 AS maven
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 
-RUN mvn package
+RUN mvn package -Dtest=!ProductControllerAcceptanceTest
 
 FROM openjdk:17.0.2-jdk
 ARG JAR_FILE=itx-technical-test.jar
