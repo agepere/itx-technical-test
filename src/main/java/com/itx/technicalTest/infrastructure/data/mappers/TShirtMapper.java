@@ -69,6 +69,9 @@ public class TShirtMapper {
 
 
     private static void addStockToDomainModel(List<StockLine> stockLines, TShirt tShirt) {
+        if (stockLines == null) {
+            stockLines = new ArrayList<>();
+        }
         stockLines.forEach(stockLine -> tShirt.addStockPerSize(stockLine.getSize(), stockLine.getStock()));
 
     }

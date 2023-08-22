@@ -23,15 +23,9 @@ public class TShirt extends Product {
     }
 
     public void addStockPerSize(String size, Integer stock) {
-        StockPerTShirtSize stockPerSize = new StockPerTShirtSize(valueOfSize(size), stock);
+        StockPerTShirtSize stockPerSize = new StockPerTShirtSize(this.valueOfSize(size), stock);
         boolean added = this.stockSet.add(stockPerSize);
         checkStockIsAdded(added);
-    }
-
-    private void checkStockIsAdded(boolean added) {
-        if (!added) {
-            throw new IllegalArgumentException("All sizes must be different.");
-        }
     }
 
     private TShirtSize valueOfSize(String size) {
@@ -39,6 +33,12 @@ public class TShirt extends Product {
             return TShirtSize.valueOf(size);
         } catch (IllegalArgumentException exception) {
             throw new IllegalArgumentException("This size is not allowed for this t-shirt. Received: " + size + ". Accepted sizes: " + Arrays.stream(TShirtSize.values()).toList());
+        }
+    }
+
+    private void checkStockIsAdded(boolean added) {
+        if (!added) {
+            throw new IllegalArgumentException("All sizes must be different.");
         }
     }
 }
