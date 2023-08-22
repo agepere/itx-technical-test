@@ -39,17 +39,4 @@ public class ProductController {
         return new ResponseEntity<>(productsDto, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/query")
-    public ResponseEntity<List<ProductDto>> getAllProductsNative(
-            @RequestParam(defaultValue = "0", required = false) Integer page,
-            @RequestParam(defaultValue = "${application.default.page.size}", required = false) Integer size,
-            @RequestParam(defaultValue = "1.0", required = false) Double salesScoreRatio,
-            @RequestParam(defaultValue = "1.0", required = false) Double stockScoreRatio) {
-        List<Product> products = (List<Product>) this.productService.getAllSortedByScoreNative(salesScoreRatio, stockScoreRatio, page, size);
-        List<ProductDto> productsDto = products.stream().map(ProductMapper::fromDomainModelToDTO).toList();
-
-        return new ResponseEntity<>(productsDto, HttpStatus.OK);
-    }
-
-
 }

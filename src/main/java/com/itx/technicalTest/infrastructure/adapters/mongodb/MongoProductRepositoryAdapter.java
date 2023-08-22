@@ -6,8 +6,6 @@ import com.itx.technicalTest.infrastructure.adapters.mongodb.aggregations.Produc
 import com.itx.technicalTest.infrastructure.data.entities.ProductEntity;
 import com.itx.technicalTest.infrastructure.data.mappers.ProductMapper;
 import com.itx.technicalTest.infrastructure.repositories.MongoProductRepository;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.stereotype.Component;
@@ -41,14 +39,6 @@ public class MongoProductRepositoryAdapter implements ProductRepository {
 
         return this.mongoTemplate.aggregate(aggregation, PRODUCT_COLLECTION, ProductEntity.class).getMappedResults()
                 .stream().map(ProductMapper::toDomainModel).toList();
-
-    }
-
-
-    @Override
-    public Iterable<Product> findAllSortedByScoreNative(Double salesScoreRatio, Double stockScoreRatio, Integer page, Integer size) {
-        Pageable pageParams = PageRequest.of(page, size);
-        return this.mongoProductRepository.findAllSortedByScore(salesScoreRatio, stockScoreRatio, pageParams).stream().map(ProductMapper::toDomainModel).toList();
 
     }
 
