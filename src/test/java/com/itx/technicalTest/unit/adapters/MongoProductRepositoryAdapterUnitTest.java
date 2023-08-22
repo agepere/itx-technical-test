@@ -8,9 +8,7 @@ import com.itx.technicalTest.infrastructure.data.mappers.ProductMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -21,7 +19,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class MongoProductRepositoryAdapterUnitTest {
 
     @InjectMocks
@@ -34,7 +31,9 @@ class MongoProductRepositoryAdapterUnitTest {
 
     @BeforeEach
     void setup() {
-        AggregationResults aggregationResults = mock(AggregationResults.class);
+        MockitoAnnotations.initMocks(this);
+
+        AggregationResults<ProductEntity> aggregationResults = mock(AggregationResults.class);
         this.productMapper = Mockito.mockStatic(ProductMapper.class);
 
         TShirt tShirt = new TShirt("1", "tshirt", 10);
