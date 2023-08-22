@@ -25,9 +25,9 @@ class ProductSalesUnitTest {
 
     @Test
     void shouldThrowInvalidNameLength() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new ProductSales(-10);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                new ProductSales(-10)
+        );
         String expectedMessage = "Sales number must be positive. Received: -10";
 
         assertTrue(exception.getMessage().contains(expectedMessage), "ProductSales - UnitTest -  Invalid exception message");

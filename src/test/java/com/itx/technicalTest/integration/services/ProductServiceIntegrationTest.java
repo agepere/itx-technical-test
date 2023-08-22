@@ -35,7 +35,7 @@ class ProductServiceIntegrationTest {
         this.productService = new ProductService(mongoProductRepositoryAdapter);
 
 
-        AggregationResults<ProductEntity> aggregationResults = mock(AggregationResults.class);
+        AggregationResults aggregationResults = mock(AggregationResults.class);
 
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName("tshirt");
