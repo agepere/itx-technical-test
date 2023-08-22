@@ -6,10 +6,11 @@ import com.itx.technicalTest.domain.models.TShirt;
 import com.itx.technicalTest.domain.repositories.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.description;
 import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 class ProductServiceUnitTest {
 
     @InjectMocks
@@ -28,8 +30,6 @@ class ProductServiceUnitTest {
 
     @BeforeEach
     void setup() {
-        MockitoAnnotations.initMocks(this);
-
         List<Product> products = new ArrayList<>();
         products.add(new TShirt("1", "tshirt", 10));
 
