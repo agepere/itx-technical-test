@@ -1,0 +1,22 @@
+version: '3'
+services:
+  api:
+    container_name: api
+    image: itx-technical-test
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
+    restart: always
+  mongo:
+    container_name: mongo
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodata:/data/db
+volumes:
+  mongodata:
